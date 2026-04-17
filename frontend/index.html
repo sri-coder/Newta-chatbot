@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newta Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Launcher bubble -->
+    <div id="launcher" onclick="toggleChat()">
+      <div class="launcher-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M4 6C4 4.9 4.9 4 6 4H22C23.1 4 24 4.9 24 6V18C24 19.1 23.1 20 22 20H16L10 24V20H6C4.9 20 4 19.1 4 18V6Z" fill="white"/>
+          <circle cx="9"  cy="13" r="1.5" fill="#0a1628"/>
+          <circle cx="14" cy="13" r="1.5" fill="#0a1628"/>
+          <circle cx="19" cy="13" r="1.5" fill="#0a1628"/>
+        </svg>
+      </div>
+      <div id="launcher-badge" class="badge hidden">1</div>
+    </div>
+
+    <!-- Chat window -->
+    <div id="chat-window" class="hidden">
+
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="header-left">
+          <div class="avatar">N</div>
+          <div class="header-info">
+            <span class="agent-name">Newta Assistant</span>
+            <span class="status"><span class="dot"></span> Online</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" title="New Chat" onclick="confirmNewChat()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+          </button>
+          <button class="icon-btn" title="Refresh" onclick="refreshChat()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+            </svg>
+          </button>
+          <button class="icon-btn" title="Minimise" onclick="toggleChat()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div id="messages" class="messages-area"></div>
+
+      <!-- Typing indicator -->
+      <div id="typing-indicator" class="typing-indicator hidden">
+        <span></span><span></span><span></span>
+      </div>
+
+      <!-- Input area -->
+      <div class="input-area">
+        <textarea
+          id="user-input"
+          placeholder="Ask me anything about Newta…"
+          rows="1"
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"
+        ></textarea>
+        <button id="send-btn" onclick="sendMessage()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Confirm dialog -->
+  <div id="confirm-overlay" class="overlay hidden">
+    <div class="confirm-box">
+      <p id="confirm-msg">Start a new chat?</p>
+      <div class="confirm-btns">
+        <button class="btn-secondary" onclick="closeConfirm()">Cancel</button>
+        <button class="btn-primary"   onclick="executeConfirm()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>
